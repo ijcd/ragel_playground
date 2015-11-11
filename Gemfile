@@ -18,6 +18,9 @@ gem 'volt-user_templates', '~> 0.4.0'
 # Add ability to send e-mail from apps.
 gem 'volt-mailer', '~> 0.1.1'
 
+# click to edit text
+gem 'volt-editable_text', path: 'gems/volt-editable_text'
+
 # Use rbnacl for message bus encrpytion
 # (optional, if you don't need encryption, disable in app.rb and remove)
 #
@@ -56,4 +59,8 @@ group :production do
 
   # Provides precompiled binaries for image compression
   gem 'image_optim_pack'
+end
+
+group :development do
+  gem 'pry-byebug'
 end

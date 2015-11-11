@@ -2,5 +2,29 @@
   Home
 
 <:Body>
-  <h1>Home</h1>
+  <h1>Ragel Pens</h1>
+
+  <table class="table">
+    {{ _pens.each_with_index do |pen, index| }}
+    <tr
+       e-click="params._index = index"
+       class="{{ if current_index == index }}selected{{ end }}"
+       >
+      <td>{{ pen._name }}</td>
+      <td><button e-click="remove_pen(pen)">X</button></td>
+    </tr>
+    {{ end }}
+  </table>
+  
+  <button e-click="add_pen">Add Pen</button>
+
+  {{ if current_pen }}
+  <h1><:editable_text value="{{ current_pen._name}}" /></h1>
+  
+  <textarea>{{ current_pen._content }}</textarea>
+  
+  <pre>
+    {{ current_pen._content }}
+  </pre>
+  {{ end }}
 

@@ -9,3 +9,6 @@ component 'bootstrap_jumbotron_theme'
 
 # provides templates for login, signup, and logout
 component 'user_templates'
+
+# editable text
+component 'editable_text'

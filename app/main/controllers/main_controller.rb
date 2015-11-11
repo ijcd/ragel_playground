@@ -1,12 +1,40 @@
+require 'pp'
+
 # By default Volt generates this controller for your Main component
 module Main
   class MainController < Volt::ModelController
+    model :store
+
     def index
       # Add code for when the index view is loaded
     end
 
     def about
       # Add code for when the about view is loaded
+    end
+
+    def add_pen
+      _pens << { name: "Unnamed Pen" }
+      params._index = _pens.array.length - 1
+    end
+
+    def remove_pen(pen)
+      pen.destroy
+      if params._index > _pens.array.length - 1
+        params._index = _pens.array.length - 1
+      end
+    end
+
+    def set_max_index
+
+    end
+
+    def current_index
+      params._index.to_i
+    end
+
+    def current_pen
+      _pens[current_index]
     end
 
     private

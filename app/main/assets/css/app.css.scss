@@ -1,1 +1,11 @@
 // Place your apps css here
+
+tr.selected td {
+  background-color: #428bca;
+  color: #ffffff;
+}
+
+textarea {
+  height: 140px;
+  width: 400px;
+}
