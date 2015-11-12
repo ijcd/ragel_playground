@@ -7,30 +7,22 @@ module EditableText
       self.toggled = false
     end
 
-    def body_element
-      Element.find('body')
-    end
+    # def body_element
+    #   Element.find('body')
+    # end
+
+    # def input_element
+    #   Element.find(section.container_node).find('input')
+    # end
 
     def toggle_editing
       self.toggled = !toggled
 
       if toggled
-        # Editing enabled, bind a listener for when they click on the document to disable
-        # it again.
-        body_element.on('click.editabletext') do |event|
-          # Find the id for the text field inside of this component.
-          clicked_id = Element.find(section.container_node).find('input').id
-
-          if clicked_id != event.target.id
-            # Didn't click inside of the edit text field, toggle back.
-            toggle_editing
-          end
-        end
-      else
-        body_element.off('click.editabletext')
+        `setTimeout(function(){ $(#{section.container_node}).find('input').focus(); }, 0)`
       end
     end
-
+    
     def edit(event)
       if event.key_code == 13
         #for some reason .stop or stop_propagation thow the following error:
@@ -40,6 +32,10 @@ module EditableText
 
         toggle_editing
       end
+    end
+    
+    def blur
+      toggle_editing
     end
 
     def value=(newvalue)
@@ -53,6 +49,6 @@ module EditableText
     def size
       return attrs.value.size
     end
-
+    
   end
 end
