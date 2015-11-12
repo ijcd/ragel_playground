@@ -1,0 +1,11 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/git-commands/git-subrepo#readme
+;
+[subrepo]
+	remote = git@github.com:ijcd/volt-editable-text.git
+	branch = master
+	commit = fb3c99731e0d72fe0e9ff5acea427f4f5bf724c5
+	parent = 9b8aa1a9f4f30ac3c718d904b395c3db7133ccaf
+	cmdver = 0.2.3
