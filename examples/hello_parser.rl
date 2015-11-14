@@ -34,4 +34,5 @@ class HelloParser < RagelParser
   end
 end
 
-HelloParser.new.parse_stdin
+#HelloParser.new.parse_stdin
+

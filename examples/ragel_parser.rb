@@ -24,7 +24,7 @@ class RagelParser
   end
 
   def status
-    puts <<JSON
+    return <<JSON
 {
   "data": "#{@data}",
   "chars": "#{data_chars}",
@@ -42,13 +42,5 @@ JSON
 
   def data_chars
     @data.map(&:chr)
-  end
-
-  def parse_stdin
-    feed('')
-    while c = STDIN.getch
-      exit(1) if c == "\u0003"
-      feed(c)
-    end
   end
 end

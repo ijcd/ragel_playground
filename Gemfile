@@ -25,6 +25,7 @@ gem 'volt-editable_text', path: 'gems/volt-editable_text'
 gem 'volt-code_highlight'
 
 gem 'oga'
+gem 'celluloid'
 
 # Use rbnacl for message bus encrpytion
 # (optional, if you don't need encryption, disable in app.rb and remove)
