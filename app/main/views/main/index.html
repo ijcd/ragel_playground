@@ -19,13 +19,13 @@
   <button e-click="add_pen">Add Pen</button>
   <button e-click="update_pen(page._ragel_input)">Run Pen</button>
 
-  <input id="autoupdate" type="checkbox" checked="{{ page._autoupdate_pen }}" />
+  <input id="autoupdate" type="checkbox" e-change="change_pen(page._ragel_input)" checked="{{ page._autoupdate_pen }}" />
   <label for="autoupdate">autoupdate</label>
 
   {{ if current_pen }}
   <h1><:editable_text value="{{ current_pen._name}}" /></h1>
   
-  <textarea e-input="update_pen(page._ragel_input)">{{ page._ragel_input }}</textarea>
+  <textarea e-input="change_pen(page._ragel_input)">{{ page._ragel_input }}</textarea>
 
   {{ raw current_pen._svg_content }}
 
