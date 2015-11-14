@@ -80,7 +80,7 @@ class RagelTasks < Volt::Task
   end
 
   def build_error(pen, err)
-    pen_id._error = err
+    pen._error = err
     pen._ruby_content = ''
     pen._dot_content = ''
     pen._svg_content = ''

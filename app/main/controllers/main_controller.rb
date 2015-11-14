@@ -49,7 +49,6 @@ module Main
     end
 
     def change_pen(ragel_input)
-      pp "change_pen", page._autoupdate, page._enhance
       update_pen(ragel_input) if page._autoupdate
     end
 
