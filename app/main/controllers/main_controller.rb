@@ -3,16 +3,28 @@ require 'pp'
 # By default Volt generates this controller for your Main component
 module Main
   class MainController < Volt::ModelController
-    model :store
-
+    
     reactive_accessor :autoupdate?
+    reactive_accessor :dirty?
+
+    def initialize(*args)
+      super
+      update_model
+    end
 
     def index
+      update_model
       select_pen(params._index || 0)
     end
 
     def about
       # Add code for when the about view is loaded
+    end
+
+    def dirty?
+      current_pen._ragel_content.then do |rc|
+        rc != page._ragel_input
+      end
     end
 
     def add_pen
@@ -56,7 +68,11 @@ module Main
     end
 
     def current_pen
-      _pens[current_index] || Pen.new_index
+      _pens[current_index]
+    end
+
+    def update_model
+      self.model = :store
     end
 
     private
