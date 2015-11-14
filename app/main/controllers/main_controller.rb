@@ -5,6 +5,8 @@ module Main
   class MainController < Volt::ModelController
     model :store
 
+    reactive_accessor :autoupdate?
+
     def index
       select_pen(params._index || 0)
     end
@@ -36,7 +38,7 @@ module Main
     end
 
     def change_pen(ragel_input)
-      update_pen(ragel_input) if page._autoupdate_pen
+      update_pen(ragel_input) if autoupdate?
     end
 
     def update_pen(ragel_input)
