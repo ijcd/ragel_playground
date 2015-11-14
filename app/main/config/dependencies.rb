@@ -12,3 +12,6 @@ component 'user_templates'
 
 # editable text
 component 'editable_text'
+
+# code highlight
+component 'code_highlight'

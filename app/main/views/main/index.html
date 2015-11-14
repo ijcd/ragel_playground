@@ -7,24 +7,47 @@
   <table class="table">
     {{ _pens.each_with_index do |pen, index| }}
     <tr
-       e-click="params._index = index"
+       e-click="select_pen(index)"
        class="{{ if current_index == index }}selected{{ end }}"
        >
       <td>{{ pen._name }}</td>
-      <td><button e-click="remove_pen(pen)">X</button></td>
+      <td><button e-click="remove_pen(pen, index)">X</button></td>
     </tr>
     {{ end }}
   </table>
   
   <button e-click="add_pen">Add Pen</button>
+  <button e-click="update_pen(page._ragel_input)">Run Pen</button>
+
+  <input id="autoupdate" type="checkbox" checked="{{ page._autoupdate_pen }}" />
+  <label for="autoupdate">autoupdate</label>
 
   {{ if current_pen }}
   <h1><:editable_text value="{{ current_pen._name}}" /></h1>
   
-  <textarea>{{ current_pen._content }}</textarea>
+  <textarea e-input="update_pen(page._ragel_input)">{{ page._ragel_input }}</textarea>
+
+  {{ raw current_pen._svg_content }}
+
+  <hr>
   
-  <pre>
-    {{ current_pen._content }}
-  </pre>
+  <pre style="color: red">{{ current_pen._error }}</pre>
+
+  <:code_highlight>
+    <pre>{{ current_pen._ragel_content }}</pre>
+  </:code_highlight>
+
+  <:code_highlight language="ruby">
+    <pre>{{ current_pen._ruby_content }}</pre>
+  </:code_highlight>
+  
+  <:code_highlight>    
+    <pre>{{ current_pen._dot_content }}</pre>
+  </:code_highlight>    
+
+  <:code_highlight language="xml">
+    <pre>{{ current_pen._svg_content }}</pre>
+  </:code_highlight>
+
   {{ end }}
 

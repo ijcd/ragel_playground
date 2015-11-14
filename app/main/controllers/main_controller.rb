@@ -6,7 +6,7 @@ module Main
     model :store
 
     def index
-      # Add code for when the index view is loaded
+      select_pen(params._index || 0)
     end
 
     def about
@@ -18,38 +18,54 @@ module Main
       params._index = _pens.array.length - 1
     end
 
-    def remove_pen(pen)
+    def remove_pen(pen, index)
       pen.destroy
-      if params._index > _pens.array.length - 1
-        params._index = _pens.array.length - 1
+      new_index = (index <= current_index) ? (current_index - 1) : current_index
+      if new_index >= 0
+        params._index = new_index
+      else
+        params._index = nil
       end
     end
 
-    def set_max_index
-
-    end
-
-    def current_index
-      params._index.to_i
-    end
-
-    def current_pen
-      _pens[current_index]
-    end
-
-    private
-
-    # The main template contains a #template binding that shows another
-    # template.  This is the path to that template.  It may change based
-    # on the params._component, params._controller, and params._action values.
-    def main_path
-      "#{params._component || 'main'}/#{params._controller || 'main'}/#{params._action || 'index'}"
-    end
-
-    # Determine if the current nav component is the active one by looking
-    # at the first part of the url against the href attribute.
-    def active_tab?
-      url.path.split('/')[1] == attrs.href.split('/')[1]
+    def select_pen(index)
+    params._index = index
+    current_pen.then do |pen|
+      page._ragel_input = pen._ragel_content
     end
   end
-end
+
+  def update_pen(ragel_input)
+    current_pen.then do |pen|
+      RagelTasks.run_ragel(pen.id, ragel_input).then do |result|
+        puts "Result: #{result}"
+      end.fail do |error|
+        puts "Error: #{error}"
+      end
+    end
+  end
+
+  def current_index
+    params._index.to_i
+  end
+
+  def current_pen
+    _pens[current_index] || Pen.new_index
+  end
+
+  private
+
+  # The main template contains a #template binding that shows another
+  # template.  This is the path to that template.  It may change based
+  # on the params._component, params._controller, and params._action values.
+  def main_path
+    "#{params._component || 'main'}/#{params._controller || 'main'}/#{params._action || 'index'}"
+  end
+
+  # Determine if the current nav component is the active one by looking
+  # at the first part of the url against the href attribute.
+  def active_tab?
+    url.path.split('/')[1] == attrs.href.split('/')[1]
+  end
+  end
+  end
