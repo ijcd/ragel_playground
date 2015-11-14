@@ -22,7 +22,7 @@ class DotWrapper
   def lettered
     @dot = @dot.gsub(/^.*->.*$/) do |line|
       line.gsub(/label = ".*"/) do |labels|
-        labels.gsub(/\d+/) { |num| ASCII_MAP[num] || num }
+        labels.gsub(/\b\d+/) { |num| ASCII_MAP[num] || num }
       end
     end
     self
