@@ -1,8 +1,9 @@
 require 'open3'
+require 'main/lib/dot_wrapper'
 require 'main/lib/svg_wrapper'
 
 class RagelTasks < Volt::Task
-  def run_ragel(pen_id, ragel_input)
+  def run_ragel(pen_id, ragel_input, enhance = false)
     
     # lookup the pen
     store._pens.find(id: pen_id).first.then do |pen|
@@ -25,7 +26,7 @@ class RagelTasks < Volt::Task
         pen._ruby_content = File.read(ruby_file)
     
         # # run ragel -V to create the dot file
-        dot_file, err = create_dot(dir, ragel_file)
+        dot_file, err = create_dot(dir, ragel_file, enhance)
         return build_error(pen, err) unless status.success?
         pen._dot_content = File.read(dot_file)
 
@@ -57,10 +58,17 @@ class RagelTasks < Volt::Task
     end
   end
 
-  def create_dot(dir, fn_input)
+  def create_dot(dir, fn_input, enhance)
     File.join(dir, "output.dot").tap do |fn_output|
       out, err, status = Open3.capture3("ragel -V #{fn_input} -o #{fn_output}")
-      return [fn_output, err, status]
+      File.join(dir, "output_enhanced.dot").tap do |fn_output_enhanced|
+        File.open(fn_output_enhanced, 'w') do |f|
+          wrapper = DotWrapper.new(File.read(fn_output))
+          wrapper = wrapper.processed if enhance
+          f.write(wrapper.dot)
+        end
+        return [fn_output_enhanced, err, status]
+      end
     end
   end
 
@@ -72,7 +80,7 @@ class RagelTasks < Volt::Task
   end
 
   def build_error(pen, err)
-    pen._error = err
+    pen_id._error = err
     pen._ruby_content = ''
     pen._dot_content = ''
     pen._svg_content = ''

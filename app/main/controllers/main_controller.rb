@@ -4,8 +4,7 @@ require 'pp'
 module Main
   class MainController < Volt::ModelController
     
-    reactive_accessor :autoupdate?
-    reactive_accessor :dirty?
+    reactive_accessor :dirty
 
     def initialize(*args)
       super
@@ -21,7 +20,7 @@ module Main
       # Add code for when the about view is loaded
     end
 
-    def dirty?
+    def dirty
       current_pen._ragel_content.then do |rc|
         rc != page._ragel_input
       end
@@ -50,12 +49,13 @@ module Main
     end
 
     def change_pen(ragel_input)
-      update_pen(ragel_input) if autoupdate?
+      pp "change_pen", page._autoupdate, page._enhance
+      update_pen(ragel_input) if page._autoupdate
     end
 
     def update_pen(ragel_input)
       current_pen.then do |pen|
-        RagelTasks.run_ragel(pen.id, ragel_input).then do |result|
+        RagelTasks.run_ragel(pen.id, ragel_input, page._enhance).then do |result|
           puts "Result: #{result}"
         end.fail do |error|
           puts "Error: #{error}"
