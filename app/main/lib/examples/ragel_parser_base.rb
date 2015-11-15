@@ -1,8 +1,9 @@
 require 'pp'
 require 'io/console'
 
-class RagelParser
+class RagelParserBase
   def initialize
+    @eof = :ignored
     @data = []
     @stack = []
     @cs = 0
@@ -17,6 +18,10 @@ class RagelParser
 
   def final?
     @cs >= first_final
+  end
+
+  def current_match(start=@p, finish=@pe)
+    @data[start..finish]
   end
 
   def first_final
@@ -42,5 +47,13 @@ JSON
 
   def data_chars
     @data.map(&:chr)
+  end
+
+  def parse_stdin
+    self.feed('')
+    while c = STDIN.getch
+      exit(1) if c == "\u0003"
+      puts self.feed(c)
+    end
   end
 end

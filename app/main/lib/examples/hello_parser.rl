@@ -7,6 +7,7 @@
   variable pe @pe;
   variable ts @ts;
   variable te @te;
+  variable act @act;
 
   main := 'hello'*;
 }%%
@@ -14,8 +15,7 @@
 
 require './ragel_parser.rb'
 
-class HelloParser < RagelParser
-
+class HelloParser < RagelParserBase
   def initialize
     %%write data;
     #%

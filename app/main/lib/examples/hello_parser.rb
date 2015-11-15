@@ -6,9 +6,9 @@
 
 =end
 
-require './ragel_parser.rb'
+require './ragel_parser_base.rb'
 
-class HelloParser < RagelParser
+class HelloParser < RagelParserBase
 
   def initialize
     
