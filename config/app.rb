@@ -7,9 +7,9 @@ Volt.configure do |config|
   #######################################
   # Basic App Info (stuff you should set)
   #######################################
-  config.domain = 'ragelpen.com'
-  config.app_name = 'Ragelpen'
-  config.mailer.from = 'Ragelpen <no-reply@ragelpen.com>'
+  config.domain = 'ragel_playground.com'
+  config.app_name = 'Ragel Playground'
+  config.mailer.from = 'Ragel Playground <no-reply@ragel_playground.com>'
 
   ############
   # App Secret
