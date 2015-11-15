@@ -43,6 +43,7 @@ Volt.configure do |config|
   # config.db_name = (config.app_name + '_' + Volt.env.to_s)
   # config.db_host = 'localhost'
   # config.db_port = 27017
+  config.db_name = ('ragelpen' + '_' + Volt.env.to_s)
 
   #####################
   # Compression options
