@@ -1,18 +1,17 @@
 
-# line 1 "examples/hello_parser.rl"
+# line 1 "./hello_parser.rl"
 =begin
 
-# line 12 "examples/hello_parser.rl"
+# line 13 "./hello_parser.rl"
 
 =end
 
 require './ragel_parser_base.rb'
 
 class HelloParser < RagelParserBase
-
   def initialize
     
-# line 16 "examples/hello_parser.rb"
+# line 15 "./hello_parser.rb"
 class << self
 	attr_accessor :_hello_key_offsets
 	private :_hello_key_offsets, :_hello_key_offsets=
@@ -81,24 +80,24 @@ end
 self.hello_en_main = 5;
 
 
-# line 21 "examples/hello_parser.rl"
+# line 21 "./hello_parser.rl"
     #%
     super
     
-# line 89 "examples/hello_parser.rb"
+# line 88 "./hello_parser.rb"
 begin
 	 @p ||= 0
 	 @pe ||=  @data.length
 	 @cs = hello_start
 end
 
-# line 24 "examples/hello_parser.rl"
+# line 24 "./hello_parser.rl"
     #%
   end
 
   def perform
     
-# line 102 "examples/hello_parser.rb"
+# line 101 "./hello_parser.rb"
 begin
 	_klen, _trans, _keys = nil
 	_goto_level = 0
@@ -190,7 +189,7 @@ begin
 	end
 	end
 
-# line 29 "examples/hello_parser.rl"
+# line 29 "./hello_parser.rl"
     #%
   end
 
@@ -199,5 +198,5 @@ begin
   end
 end
 
-#HelloParser.new.parse_stdin
+HelloParser.new.parse_stdin
 

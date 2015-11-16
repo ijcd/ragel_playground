@@ -13,7 +13,7 @@
 }%%
 =end
 
-require './ragel_parser.rb'
+require './ragel_parser_base.rb'
 
 class HelloParser < RagelParserBase
   def initialize
@@ -34,5 +34,5 @@ class HelloParser < RagelParserBase
   end
 end
 
-#HelloParser.new.parse_stdin
+HelloParser.new.parse_stdin
 
