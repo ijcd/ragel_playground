@@ -26,8 +26,8 @@
   {{ if current_pen }}
   <h1><:editable_text value="{{ current_pen._name}}" /></h1>
   
-  <textarea e-input="change_pen(page._ragel_input)">{{ page._ragel_input }}</textarea>
-
+  <textarea e-input="change_pen(page._ragel_input)">{{ ragel_input_val }}</textarea>
+  
   {{ dirty }}
   {{ page._enhance }}  
   {{ raw current_pen._svg_content }}

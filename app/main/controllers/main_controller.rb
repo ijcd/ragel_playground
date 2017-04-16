@@ -26,6 +26,15 @@ module Main
       end
     end
 
+    def ragel_input_val
+        page._ragel_input
+    end
+
+    def ragel_input_val=(val)
+        page._ragel_input = val
+        puts "TRIG"
+    end
+
     def add_pen
       _pens << { name: "Unnamed Pen" }
       params._index = _pens.array.length - 1
