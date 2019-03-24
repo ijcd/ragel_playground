@@ -41,8 +41,8 @@ Volt.configure do |config|
 
   # config.db_driver = 'mongo'
   # config.db_name = (config.app_name + '_' + Volt.env.to_s)
-  # config.db_host = 'localhost'
-  # config.db_port = 27017
+  config.db_host = ENV['mongo_host'] || 'localhost'
+  config.db_port = ENV['mongo_port'] || 'localhost'
   config.db_name = ('ragelpen' + '_' + Volt.env.to_s)
 
   #####################
